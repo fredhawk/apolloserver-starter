@@ -1,0 +1,11 @@
+{
+  "name": "starter-boilerplate",
+  "version": "0.0.1",
+  "description": "Boilerplate starter project for different backend setups.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Fred Hawk",
+  "license": "ISC"
+}
