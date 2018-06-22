@@ -6,6 +6,41 @@
   "scripts": {
     "test": "test"
   },
+  "eslintConfig": {
+    "extends": [
+      "airbnb-base",
+      "plugin:prettier/recommended",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "root": true,
+    "env": {
+      "node": true,
+      "browser": false,
+      "es6": true
+    },
+    "rules": {
+      "prettier/prettier": "error"
+    }
+  },
   "author": "Fred Hawk",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.51",
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "jest": "^23.1.0",
+    "prettier": "^1.13.5"
+  },
+  "dependencies": {
+    "@babel/node": "^7.0.0-beta.51",
+    "@babel/polyfill": "^7.0.0-beta.51"
+  }
 }
