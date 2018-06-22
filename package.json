@@ -4,7 +4,7 @@
   "description": "Boilerplate starter project for different backend setups.",
   "main": "index.js",
   "scripts": {
-    "start": "npx nodemon --exec babel index.js",
+    "start": "npx nodemon --exec babel-node index.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
@@ -28,12 +28,16 @@
       "prettier/prettier": "error"
     }
   },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "node_modules"
+    ]
+  },
   "author": "Fred Hawk",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.51",
-    "@babel/core": "^7.0.0-beta.51",
-    "@babel/preset-env": "^7.0.0-beta.51",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-config-prettier": "^2.9.0",
@@ -44,8 +48,5 @@
     "nodemon": "^1.17.5",
     "prettier": "^1.13.5"
   },
-  "dependencies": {
-    "@babel/node": "^7.0.0-beta.51",
-    "@babel/polyfill": "^7.0.0-beta.51"
-  }
+  "dependencies": {}
 }
