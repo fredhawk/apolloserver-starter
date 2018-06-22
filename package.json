@@ -4,7 +4,10 @@
   "description": "Boilerplate starter project for different backend setups.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "npx nodemon --exec babel index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "eslintConfig": {
     "extends": [
@@ -37,6 +40,7 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-prettier": "^2.6.0",
     "jest": "^23.1.0",
+    "nodemon": "^1.17.5",
     "prettier": "^1.13.5"
   },
   "dependencies": {

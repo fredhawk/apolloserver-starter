@@ -1,4 +1,3 @@
-import {add } from './temp';
+import { add } from "./temp";
 
-
-add(1, 2)
+add(1, 2);
