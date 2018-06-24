@@ -58,6 +58,7 @@
   "dependencies": {
     "apollo-server": "^2.0.0-rc.2",
     "dotenv": "^6.0.0",
+    "faker": "^4.1.0",
     "graphql": "^0.13.2"
   }
 }

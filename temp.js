@@ -1,10 +1,10 @@
 const add = (a, b) => a + b;
 
-console.log(add(1, 2));
+// console.log(add(1, 2));
 
 const conc = (a, b) => `${a} and ${b}`;
 
-console.log(conc(`red`, `blue`));
+// console.log(conc(`red`, `blue`));
 
 const arr = [
   "red",
