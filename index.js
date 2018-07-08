@@ -1,5 +1,5 @@
 import { ApolloServer } from "apollo-server";
-import typeDefs from "./queries/queries";
+import typeDefs from "./schemas/schema";
 import resolvers from "./resolvers/resolvers";
 import mocks from "./mocks/mocks";
 

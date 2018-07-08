@@ -1,7 +1,6 @@
-import { data } from "../data/data";
+import { recipes } from "../data/data";
 
 describe("Recipes", () => {
-  const recipes = data.Recipe();
   it("should have 4 recipes", () => {
     expect(recipes).toHaveLength(4);
   });

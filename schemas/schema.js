@@ -31,7 +31,9 @@ const typeDefs = gql`
   # (A "Mutation" type will be covered later on.)
   type Query {
     users: [User]
+    userstest: [User]
     recipes: [Recipe]
+    recipestest: [Recipe]
   }
 `;
 
