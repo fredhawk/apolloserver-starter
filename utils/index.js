@@ -50,12 +50,5 @@ export const generateData = (type, seed) => {
 
 export const seeds = [155, 324, 173, 321];
 
-// type Options = {
-//   context: {
-//     user: Object,
-//   },
-//   variables: Object,
-// }
-
 export const request = (query, context = {}, variables = {}) =>
   graphql(schema, query, undefined, { context }, variables);
