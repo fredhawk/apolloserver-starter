@@ -30,6 +30,8 @@ const typeDefs = gql`
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
+    getUsers(id: String, email: String): [User]
+    getUser(id: String): User
     users: [User]
     userstest: [User]
     recipes: [Recipe]
