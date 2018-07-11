@@ -8,7 +8,7 @@ import database from "./database/database";
 import "dotenv/config";
 
 // Start Database connection.
-database(process.env.MONGODB);
+const db = database(process.env.MONGODB);
 
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers
