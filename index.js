@@ -1,22 +1,14 @@
 import { ApolloServer } from "apollo-server";
-import mongoose from "mongoose";
 
 import typeDefs from "./schemas/schema";
 import resolvers from "./resolvers/resolvers";
 import mocks from "./mocks/mocks";
+import database from "./database/database";
 
 import "dotenv/config";
 
-// Setup MongoDB connection
-mongoose.connect(
-  process.env.MONGODB,
-  { useNewUrlParser: true }
-);
-const db = mongoose.connection;
-db.on(`error`, console.error.bind(console, "MongoDB connection error:"));
-db.once(`open`, () => {
-  console.log("Connected to MongoDB");
-});
+// Start Database connection.
+database(process.env.MONGODB);
 
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers
