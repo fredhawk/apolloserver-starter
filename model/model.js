@@ -15,7 +15,7 @@ const recipeSchema = new Schema({
   createdAt: Date,
   ingredients: [
     {
-      ingredientname: String,
+      name: String,
       amount: Number,
       unit: String
     }
