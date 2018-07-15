@@ -33,10 +33,15 @@ const typeDefs = gql`
   type Query {
     getUsers(id: String, email: String): [User]
     getUser(id: String): User
+    getRecipes(id: String, title: String): [Recipe]
     users: [User]
     userstest: [User]
     recipes: [Recipe]
     recipestest: [Recipe]
+  }
+
+  type Mutation {
+    createUser(name: String!, email: String!, password: String!): User
   }
 `;
 

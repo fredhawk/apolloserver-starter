@@ -4,14 +4,15 @@ import { User, Recipe } from "../model/model";
 export default {
   Query: {
     getUsers: () => User.find(),
-    getUser: (root, args) => User.findById(args.id)
-    // getRecipes: () => Recipe.find().populate(`author`)
+    getUser: (root, args) => User.findById(args.id),
+    getRecipes: (root, args) => Recipe.find(args)
+  },
+  Mutation: {
+    createUser(root, args) {
+      const user = new User(args);
+      return user.save();
+    }
   }
-  // Mutation: {
-  // createUser(root, args) {
-  //   const user = new User(args);
-  //   return user.save();
-  // },
   // async updateUser(root, args) {
   //   const user = await User.findByIdAndUpdate(args.id, args, { new: true });
   //   return user;
