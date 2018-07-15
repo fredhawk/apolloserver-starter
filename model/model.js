@@ -5,7 +5,8 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
   name: String,
   email: String,
-  password: String
+  password: String,
+  recipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }]
 });
 
 const recipeSchema = new Schema({
