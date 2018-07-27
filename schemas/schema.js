@@ -13,6 +13,10 @@ const typeDefs = gql`
     updatedAt: String
   }
 
+  type Token {
+    token: String!
+  }
+
   type Recipe {
     id: ID
     title: String
@@ -65,7 +69,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(input: UserInput!): User
+    createUser(input: UserInput!): Token
     updateUser(id: String!, name: String, email: String, password: String): User
     deleteUser(id: String!): User
     createRecipe(input: RecipeInput!): Recipe

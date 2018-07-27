@@ -52,16 +52,14 @@ describe("User", () => {
     expect(users).toHaveLength(2);
     expect(users[0]).toMatchObject({
       name: "Jane",
-      email: "jane@example.com",
-      password: "asfh2899831"
+      email: "jane@example.com"
     });
   });
   it("should return a user with Janes information", async () => {
     const jane = await User.findOne({ name: "Jane" });
     expect(jane).toMatchObject({
       name: "Jane",
-      email: "jane@example.com",
-      password: "asfh2899831"
+      email: "jane@example.com"
     });
   });
 
@@ -81,15 +79,13 @@ describe("User", () => {
     const deletedUser = await User.findOneAndRemove({ name: "Jane" });
     expect(deletedUser).toMatchObject({
       name: "Jane",
-      email: "jane@example.com",
-      password: "asfh2899831"
+      email: "jane@example.com"
     });
     const users = await User.find();
     expect(users).toHaveLength(1);
     expect(users[0]).toMatchObject({
       name: "Rick",
-      email: "rick@example.com",
-      password: "lkjsaf187"
+      email: "rick@example.com"
     });
   });
 });

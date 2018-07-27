@@ -1,5 +1,13 @@
-// import { users, recipes } from "../data/data";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+
 import { User, Recipe } from "../model/model";
+import "dotenv/config";
+
+const createToken = (user, secret, expiresIn) => {
+  const { name, email } = user;
+  return jwt.sign({ name, email }, secret, { expiresIn });
+};
 
 export default {
   Query: {
@@ -19,7 +27,7 @@ export default {
         throw new Error("User already exists");
       }
       const newUser = await new User({ name, email, password }).save();
-      return newUser;
+      return { token: createToken(newUser, process.env.SECRET, "1hr") };
     },
     async updateUser(root, args) {
       const user = await User.findByIdAndUpdate(args.id, args, { new: true });
