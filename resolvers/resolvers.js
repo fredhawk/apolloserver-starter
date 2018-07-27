@@ -7,9 +7,19 @@ export default {
     getRecipes: (root, args) => Recipe.find(args)
   },
   Mutation: {
-    createUser(root, args) {
-      const user = new User(args);
-      return user.save();
+    async createUser(
+      root,
+      {
+        input: { name, email, password }
+      }
+    ) {
+      const user = await User.findOne({ email });
+
+      if (user) {
+        throw new Error("User already exists");
+      }
+      const newUser = await new User({ name, email, password }).save();
+      return newUser;
     },
     async updateUser(root, args) {
       const user = await User.findByIdAndUpdate(args.id, args, { new: true });
@@ -19,9 +29,20 @@ export default {
       const user = await User.findByIdAndRemove(args.id);
       return user;
     },
-    createRecipe(root, args) {
-      const recipe = new Recipe(args);
-      return recipe.save();
+    async createRecipe(
+      root,
+      {
+        input: { title, description, cooktime, steps, ingredients }
+      }
+    ) {
+      const recipe = new Recipe({
+        title,
+        description,
+        cooktime,
+        steps,
+        ingredients
+      }).save();
+      return recipe;
     }
   },
   User: {
