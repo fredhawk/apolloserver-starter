@@ -72,6 +72,8 @@ const typeDefs = gql`
     createUser(input: UserInput!): Token
     updateUser(id: String!, name: String, email: String, password: String): User
     deleteUser(id: String!): User
+    signInUser(email: String!, password: String): Token
+
     createRecipe(input: RecipeInput!): Recipe
   }
 `;
