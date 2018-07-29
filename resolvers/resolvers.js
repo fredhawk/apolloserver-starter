@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-import { User, Recipe } from "../model/model";
 import "dotenv/config";
 
 const createToken = (user, secret, expiresIn) => {
@@ -11,15 +10,16 @@ const createToken = (user, secret, expiresIn) => {
 
 export default {
   Query: {
-    getUsers: (root, args) => User.find(args),
-    getRecipes: (root, args) => Recipe.find(args)
+    getUsers: (root, args, { User }) => User.find(args),
+    getRecipes: (root, args, { Recipe }) => Recipe.find(args)
   },
   Mutation: {
     async createUser(
       root,
       {
         input: { name, email, password }
-      }
+      },
+      { User }
     ) {
       const user = await User.findOne({ email });
 
@@ -29,11 +29,11 @@ export default {
       const newUser = await new User({ name, email, password }).save();
       return { token: createToken(newUser, process.env.SECRET, "1hr") };
     },
-    async updateUser(root, args) {
+    async updateUser(root, args, { User }) {
       const user = await User.findByIdAndUpdate(args.id, args, { new: true });
       return user;
     },
-    async deleteUser(root, args) {
+    async deleteUser(root, args, { User }) {
       const user = await User.findByIdAndRemove(args.id);
       return user;
     },
@@ -41,7 +41,8 @@ export default {
       root,
       {
         input: { title, description, cooktime, steps, ingredients }
-      }
+      },
+      { Recipe }
     ) {
       const recipe = new Recipe({
         title,
