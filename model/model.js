@@ -76,7 +76,7 @@ const recipeSchema = new Schema(
         required: true
       }
     ],
-    author: { type: Schema.Types.ObjectId, ref: "User" }
+    authorid: { type: String, required: true }
   },
   { timestamps: true }
 );

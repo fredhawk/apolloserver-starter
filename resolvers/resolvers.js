@@ -11,7 +11,10 @@ const createToken = (user, secret, expiresIn) => {
 export default {
   Query: {
     getUsers: (root, args, { User }) => User.find(args),
-    getRecipes: (root, args, { Recipe }) => Recipe.find(args)
+    getRecipes: async (root, args, { Recipe }) => {
+      const recipes = await Recipe.find(args);
+      return recipes;
+    }
   },
   Mutation: {
     async createUser(
@@ -52,16 +55,17 @@ export default {
     async createRecipe(
       root,
       {
-        input: { title, description, cooktime, steps, ingredients }
+        input: { title, description, cooktime, steps, ingredients, authorid }
       },
       { Recipe }
     ) {
-      const recipe = new Recipe({
+      const recipe = await new Recipe({
         title,
         description,
         cooktime,
         steps,
-        ingredients
+        ingredients,
+        authorid
       }).save();
       return recipe;
     }

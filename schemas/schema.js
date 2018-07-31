@@ -26,7 +26,7 @@ const typeDefs = gql`
     updatedAt: String
     ingredients: [Ingredient]
     steps: [String]
-    author: User
+    authorid: String
   }
 
   type Ingredient {
@@ -54,14 +54,14 @@ const typeDefs = gql`
     cooktime: Int!
     ingredients: [IngredientInput!]!
     steps: [String!]
-    author: ID
+    authorid: String!
   }
 
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
     getUsers(id: String, email: String): [User]
-    getRecipes(id: String, title: String, author: ID): [Recipe]
+    getRecipes(id: String, title: String, authorid: String): [Recipe]
     users: [User]
     userstest: [User]
     recipes: [Recipe]
