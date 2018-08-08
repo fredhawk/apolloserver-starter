@@ -4,14 +4,14 @@ const typeDefs = gql`
   # Comments in GraphQL are defined with the hash (#) symbol.
 
   type User {
-    id: String
+    id: ID
     name: String
     email: String
     password: String
   }
 
   type Recipe {
-    id: String
+    id: ID
     title: String
     description: String
     cooktime: Int
