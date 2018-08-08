@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npx nodemon --exec babel-node index.js",
     "lint-staged": "lint-staged",
+    "format": "prettier --write \"**/*.+(js|md|ts|css|sass|less|graphql|yml|yaml|scss|json|vue)\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
@@ -17,8 +18,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "lint-staged"
+      "pre-commit": "npm run test && lint-staged",
+      "pre-push": "npm run test && lint-staged"
     }
   },
   "author": "Fred Hawk",

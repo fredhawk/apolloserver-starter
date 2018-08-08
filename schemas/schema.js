@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server'
 
 const typeDefs = gql`
   # Comments in GraphQL are defined with the hash (#) symbol.
@@ -35,6 +35,6 @@ const typeDefs = gql`
     recipes: [Recipe]
     recipestest: [Recipe]
   }
-`;
+`
 
-export default typeDefs;
+export default typeDefs
