@@ -1,86 +1,95 @@
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
-const { Schema } = mongoose;
+const { Schema } = mongoose
+const skipInit = process.env.NODE_ENV === 'test'
 
 const userSchema = new Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     email: {
       type: String,
-      required: true
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
-    recipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }]
+    recipes: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
   },
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
-userSchema.pre("save", function(next) {
-  if (!this.isModified("password")) {
-    return next();
+userSchema.pre('save', function(next) {
+  if (!this.isModified('password')) {
+    return next()
   }
   bcrypt.genSalt(10, (err, salt) => {
     if (err) {
-      return next(err);
+      return next(err)
     }
     bcrypt.hash(this.password, salt, (err, hash) => {
       if (err) {
-        return next(err);
+        return next(err)
       }
-      this.password = hash;
-      next();
-    });
-  });
-});
+      this.password = hash
+      next()
+    })
+  })
+})
 
 const recipeSchema = new Schema(
   {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     description: {
       type: String,
-      required: true
+      required: true,
     },
     cooktime: {
       type: Number,
-      required: true
+      required: true,
     },
     ingredients: [
       {
         name: {
           type: String,
-          required: true
+          required: true,
         },
         amount: {
           type: Number,
-          required: true
+          required: true,
         },
         unit: {
           type: String,
-          required: true
-        }
-      }
+          required: true,
+        },
+      },
     ],
     steps: [
       {
         type: String,
-        required: true
-      }
+        required: true,
+      },
     ],
-    authorid: { type: String, required: true }
+    authorid: { type: String, required: true },
   },
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
-export const User = mongoose.model(`User`, userSchema);
+export const User = mongoose.model(`User`, userSchema, 'users', skipInit)
 
-export const Recipe = mongoose.model(`Recipe`, recipeSchema);
+export const Recipe = mongoose.model(
+  `Recipe`,
+  recipeSchema,
+  'recipes',
+  skipInit,
+)

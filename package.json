@@ -5,39 +5,22 @@
   "main": "index.js",
   "scripts": {
     "start": "npx nodemon --exec babel-node index.js",
-    "test": "jest",
+    "lint-staged": "lint-staged",
+    "format": "prettier --write \"**/*.+(js|md|ts|css|sass|less|graphql|yml|yaml|scss|json|vue)\"",
+    "test": "jest --detectOpenHandles",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
-  },
-  "eslintConfig": {
-    "extends": [
-      "airbnb-base",
-      "plugin:prettier/recommended",
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
-    "root": true,
-    "env": {
-      "node": true,
-      "browser": false,
-      "es6": true
-    },
-    "rules": {
-      "prettier/prettier": "error"
-    }
   },
   "jest": {
     "modulePathIgnorePatterns": [
       "node_modules"
-    ]
+    ],
+    "testURL": "http://localhost/"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test",
-      "pre-push": "npm test",
-      "...": "..."
+      "pre-commit": "npm run test && lint-staged",
+      "pre-push": "npm run test && lint-staged"
     }
   },
   "author": "Fred Hawk",
@@ -45,15 +28,16 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^4.19.1",
+    "eslint": "^5.3.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "husky": "^1.0.0-rc.9",
-    "jest": "^23.1.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "husky": "^1.0.0-rc.13",
+    "jest": "^23.4.2",
+    "lint-staged": "^7.2.0",
     "nodemon": "^1.17.5",
-    "prettier": "^1.13.5"
+    "prettier": "^1.14.1"
   },
   "dependencies": {
     "apollo-server": "^2.0.0",
