@@ -14,7 +14,8 @@
   "jest": {
     "modulePathIgnorePatterns": [
       "node_modules"
-    ]
+    ],
+    "testURL": "http://localhost/"
   },
   "husky": {
     "hooks": {
@@ -33,7 +34,7 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-prettier": "^2.6.2",
     "husky": "^1.0.0-rc.13",
-    "jest": "^23.1.0",
+    "jest": "^23.4.2",
     "lint-staged": "^7.2.0",
     "nodemon": "^1.17.5",
     "prettier": "^1.14.1"
