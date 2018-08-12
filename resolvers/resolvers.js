@@ -11,6 +11,7 @@ const createToken = (user, secret, expiresIn) => {
 export default {
   Query: {
     getUsers: (root, args, { User }) => User.find(args),
+    me: (_, { _id }, { User }) => User.findOne({ _id }),
     getRecipes: async (root, args, { Recipe }) => {
       const recipes = await Recipe.find(args)
       return recipes
@@ -36,8 +37,8 @@ export default {
       const user = await User.findByIdAndUpdate(args.id, args, { new: true })
       return user
     },
-    async deleteUser(root, args, { User }) {
-      const user = await User.findByIdAndRemove(args.id)
+    async deleteUser(root, { _id }, { User }) {
+      const user = await User.findByIdAndRemove(_id)
       return user
     },
     async signInUser(root, { email, password }, { User }) {

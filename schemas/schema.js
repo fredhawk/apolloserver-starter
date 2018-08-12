@@ -4,7 +4,7 @@ const typeDefs = gql`
   # Comments in GraphQL are defined with the hash (#) symbol.
 
   type User {
-    id: ID
+    _id: ID
     name: String
     email: String
     password: String
@@ -18,7 +18,7 @@ const typeDefs = gql`
   }
 
   type Recipe {
-    id: ID
+    _id: ID
     title: String
     description: String
     cooktime: Int
@@ -30,7 +30,7 @@ const typeDefs = gql`
   }
 
   type Ingredient {
-    id: ID
+    _id: ID
     name: String
     amount: Int
     unit: String
@@ -60,8 +60,9 @@ const typeDefs = gql`
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
-    getUsers(id: String, email: String): [User]
-    getRecipes(id: String, title: String, authorid: String): [Recipe]
+    getUsers(_id: String, email: String): [User]
+    getRecipes(_id: String, title: String, authorid: String): [Recipe]
+    me(_id: String!): User
     users: [User]
     userstest: [User]
     recipes: [Recipe]
@@ -70,8 +71,13 @@ const typeDefs = gql`
 
   type Mutation {
     createUser(input: UserInput!): Token
-    updateUser(id: String!, name: String, email: String, password: String): User
-    deleteUser(id: String!): User
+    updateUser(
+      _id: String!
+      name: String
+      email: String
+      password: String
+    ): User
+    deleteUser(_id: String!): User
     signInUser(email: String!, password: String): Token
 
     createRecipe(input: RecipeInput!): Recipe
