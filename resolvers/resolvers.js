@@ -75,4 +75,7 @@ export default {
   User: {
     recipes: ({ _id }, args, { Recipe }) => Recipe.find({ authorid: _id }),
   },
+  Recipe: {
+    authorid: ({ authorid }, args, { User }) => User.findOne({ _id: authorid }),
+  },
 }

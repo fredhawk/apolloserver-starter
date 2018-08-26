@@ -26,7 +26,7 @@ const typeDefs = gql`
     updatedAt: String
     ingredients: [Ingredient]
     steps: [String]
-    authorid: String
+    authorid: User!
   }
 
   type Ingredient {
