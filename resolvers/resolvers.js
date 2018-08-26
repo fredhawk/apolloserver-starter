@@ -11,6 +11,7 @@ const createToken = (user, secret, expiresIn) => {
 export default {
   Query: {
     getUsers: (root, args, { User }) => User.find(args),
+    getUser: (parent, { _id }, { User }) => User.findOne({ _id }),
     me: (_, { _id }, { User }) => User.findOne({ _id }),
     getRecipes: async (root, args, { Recipe }) => {
       const recipes = await Recipe.find(args)
@@ -72,13 +73,6 @@ export default {
     },
   },
   User: {
-    // recipes: ({ id }) => Recipe.find(recipe => recipe.author === id)
-  },
-  Recipe: {
-    // author: parent => {
-    //   console.log(parent);
-    //   // return User.find(parent.author.id);
-    //   return null;
-    // }
+    recipes: ({ _id }, args, { Recipe }) => Recipe.find({ authorid: _id }),
   },
 }
