@@ -27,7 +27,7 @@ describe('Recipe', () => {
         'Roll the mix into balls.',
         'Fry the balls in a pan.',
       ],
-      authorid: '1',
+      author: '1',
     })
     const recipe2 = await new Recipe({
       title: 'Pasta Carbonara',
@@ -44,7 +44,7 @@ describe('Recipe', () => {
         'Fry the bacon.',
         'Mix it together and add the cheese.',
       ],
-      authorid: '4',
+      author: '4',
     })
     const recipe3 = await new Recipe({
       title: 'Meatloaf',
@@ -62,7 +62,7 @@ describe('Recipe', () => {
         'Make a roll of the mix.',
         'Put it on a plate and into the oven for 30 minutes.',
       ],
-      authorid: '2',
+      author: '2',
     })
     const recipe4 = await new Recipe({
       title: 'Pasta Bolognese',
@@ -80,7 +80,7 @@ describe('Recipe', () => {
         'Cook the pasta.',
         'Cook the meat in a pan.',
       ],
-      authorid: '2',
+      author: '2',
     })
     await recipe1.save()
     await recipe2.save()
@@ -112,7 +112,7 @@ describe('Recipe', () => {
         'Boil the pasta',
         'Eat.',
       ],
-      authorid: '2',
+      author: '2',
     })
 
     await recipe.save()
@@ -130,7 +130,7 @@ describe('Recipe', () => {
     expect(recipes[0]).toHaveProperty('createdAt')
     expect(recipes[0]).toHaveProperty('ingredients')
     expect(recipes[0]).toHaveProperty('steps')
-    expect(recipes[0]).toHaveProperty('authorid')
+    expect(recipes[0]).toHaveProperty('author')
   })
 
   it('should update recipe', async () => {

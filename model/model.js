@@ -80,7 +80,7 @@ const recipeSchema = new Schema(
         required: true,
       },
     ],
-    authorid: { type: String, required: true },
+    author: { type: String, required: true },
   },
   { timestamps: true },
 )

@@ -12,7 +12,7 @@ export default {
   Query: {
     getUsers: (root, args, { User }) => User.find(args),
     getUser: (parent, { _id }, { User }) => User.findOne({ _id }),
-    me: (_, { _id }, { User }) => User.findOne({ _id }),
+    me: (_, args, { me }) => me,
     getRecipes: async (root, args, { Recipe }) => {
       const recipes = await Recipe.find(args)
       return recipes
@@ -57,7 +57,7 @@ export default {
     async createRecipe(
       root,
       {
-        input: { title, description, cooktime, steps, ingredients, authorid },
+        input: { title, description, cooktime, steps, ingredients, author },
       },
       { Recipe },
     ) {
@@ -67,15 +67,15 @@ export default {
         cooktime,
         steps,
         ingredients,
-        authorid,
+        author,
       }).save()
       return recipe
     },
   },
   User: {
-    recipes: ({ _id }, args, { Recipe }) => Recipe.find({ authorid: _id }),
+    recipes: ({ _id }, args, { Recipe }) => Recipe.find({ author: _id }),
   },
   Recipe: {
-    authorid: ({ authorid }, args, { User }) => User.findOne({ _id: authorid }),
+    author: ({ author }, args, { User }) => User.findOne({ _id: author }),
   },
 }
