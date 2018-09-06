@@ -17,11 +17,11 @@ const db = database(process.env.MONGODB)
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: {
+  context: async () => ({
     Recipe,
     User,
-    me: User.findOne({ _id: '5b6bb9d9c5a1824f29a576d4' }),
-  },
+    me: await User.findOne({ _id: '5b6bb9d9c5a1824f29a576d4' }),
+  }),
   mocks,
 })
 
