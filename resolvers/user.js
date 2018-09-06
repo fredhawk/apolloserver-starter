@@ -13,10 +13,6 @@ export default {
     getUsers: (root, args, { User }) => User.find(args),
     getUser: (parent, { _id }, { User }) => User.findOne({ _id }),
     me: (_, args, { me }) => me,
-    getRecipes: async (root, args, { Recipe }) => {
-      const recipes = await Recipe.find(args)
-      return recipes
-    },
   },
   Mutation: {
     async createUser(
@@ -54,28 +50,8 @@ export default {
 
       return { token: createToken(user, process.env.SECRET, '1hr') }
     },
-    async createRecipe(
-      root,
-      {
-        input: { title, description, cooktime, steps, ingredients, author },
-      },
-      { Recipe },
-    ) {
-      const recipe = await new Recipe({
-        title,
-        description,
-        cooktime,
-        steps,
-        ingredients,
-        author,
-      }).save()
-      return recipe
-    },
   },
   User: {
     recipes: ({ _id }, args, { Recipe }) => Recipe.find({ author: _id }),
-  },
-  Recipe: {
-    author: ({ author }, args, { User }) => User.findOne({ _id: author }),
   },
 }

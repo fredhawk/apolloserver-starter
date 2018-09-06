@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server'
 
 import typeDefs from './schemas/schema'
-import resolvers from './resolvers/resolvers'
+import resolvers from './resolvers'
 import mocks from './mocks/mocks'
 import database from './database/database'
 import { User, Recipe } from './model/model'
