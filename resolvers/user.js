@@ -1,8 +1,6 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-import 'dotenv/config'
-
 const createToken = (user, secret, expiresIn) => {
   const { name, email } = user
   return jwt.sign({ name, email }, secret, { expiresIn })
@@ -20,7 +18,7 @@ export default {
       {
         input: { name, email, password },
       },
-      { User },
+      { User, secret },
     ) {
       const user = await User.findOne({ email })
 
@@ -28,7 +26,7 @@ export default {
         throw new Error('User already exists')
       }
       const newUser = await new User({ name, email, password }).save()
-      return { token: createToken(newUser, process.env.SECRET, '1hr') }
+      return { token: createToken(newUser, secret, '1hr') }
     },
     async updateUser(root, args, { User }) {
       const user = await User.findByIdAndUpdate(args.id, args, { new: true })
@@ -38,7 +36,7 @@ export default {
       const user = await User.findByIdAndRemove(_id)
       return user
     },
-    async signInUser(root, { email, password }, { User }) {
+    async signInUser(root, { email, password }, { User, secret }) {
       const user = await User.findOne({ email })
       if (!user) {
         throw new Error('User not found')
@@ -48,7 +46,7 @@ export default {
         throw new Error('Invalid password')
       }
 
-      return { token: createToken(user, process.env.SECRET, '1hr') }
+      return { token: createToken(user, secret, '1hr') }
     },
   },
   User: {

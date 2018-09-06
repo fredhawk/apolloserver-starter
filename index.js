@@ -21,6 +21,7 @@ const server = new ApolloServer({
     Recipe,
     User,
     me: await User.findOne({ _id: '5b6bb9d9c5a1824f29a576d4' }),
+    secret: process.env.SECRET,
   }),
   mocks,
 })
