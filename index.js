@@ -1,4 +1,5 @@
-import { ApolloServer } from 'apollo-server'
+import { ApolloServer, AuthenticationError } from 'apollo-server'
+import jwt from 'jsonwebtoken'
 
 import typeDefs from './schemas/schema'
 import resolvers from './resolvers'
@@ -11,18 +12,36 @@ import 'dotenv/config'
 // Start Database connection.
 const db = database(process.env.MONGODB)
 
+const getMe = async req => {
+  const token = req.headers['x-token']
+
+  if (token) {
+    try {
+      return await jwt.verify(token, process.env.SECRET)
+    } catch (e) {
+      throw new AuthenticationError(
+        'Your session has expired. Please sign in again.',
+      )
+    }
+  }
+}
+
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers
 // responsible for fetching the data for those types.
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: async () => ({
-    Recipe,
-    User,
-    me: await User.findOne({ _id: '5b6bb9d9c5a1824f29a576d4' }),
-    secret: process.env.SECRET,
-  }),
+  context: async ({ req }) => {
+    const me = await getMe(req)
+
+    return {
+      Recipe,
+      User,
+      me,
+      secret: process.env.SECRET,
+    }
+  },
   mocks,
 })
 

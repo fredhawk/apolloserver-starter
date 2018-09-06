@@ -32,7 +32,6 @@ export default gql`
     cooktime: Int!
     ingredients: [IngredientInput!]!
     steps: [String!]
-    author: String!
   }
 
   extend type Query {
