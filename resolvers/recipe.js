@@ -27,12 +27,21 @@ export default {
         return recipe
       },
     ),
+    updateRecipe: combineResolvers(
+      isAuthenticated,
+      isRecipeOwner,
+      async (parent, args, { Recipe }) => {
+        const recipe = await Recipe.findByIdAndUpdate(args._id, args.input, {
+          new: true,
+        })
+        return recipe
+      },
+    ),
     deleteRecipe: combineResolvers(
       isAuthenticated,
       isRecipeOwner,
       async (parent, { _id }, { Recipe }) => {
         const recipe = await Recipe.findByIdAndRemove(_id)
-        console.log(recipe)
         return recipe
       },
     ),

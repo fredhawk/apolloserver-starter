@@ -30,7 +30,7 @@ export default {
       return { token: createToken(newUser, secret, '1hr') }
     },
     async updateUser(parent, args, { User }) {
-      const user = await User.findByIdAndUpdate(args.id, args, { new: true })
+      const user = await User.findByIdAndUpdate(args._id, args, { new: true })
       return user
     },
     async deleteUser(parent, { _id }, { User }) {

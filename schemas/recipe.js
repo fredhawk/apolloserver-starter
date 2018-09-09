@@ -34,6 +34,14 @@ export default gql`
     steps: [String!]
   }
 
+  input RecipeUpdateInput {
+    title: String
+    description: String
+    cooktime: Int
+    ingredients: [IngredientInput]
+    steps: [String]
+  }
+
   extend type Query {
     getRecipes(_id: String, title: String, author: String): [Recipe]
     recipes: [Recipe]
@@ -41,7 +49,8 @@ export default gql`
   }
 
   extend type Mutation {
-    createRecipe(input: RecipeInput!): Recipe
+    createRecipe(input: RecipeInput!): Recipe!
+    updateRecipe(_id: ID!, input: RecipeUpdateInput!): Recipe!
     deleteRecipe(_id: ID!): Boolean!
   }
 `
