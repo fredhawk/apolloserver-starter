@@ -1,5 +1,5 @@
 import { combineResolvers } from 'graphql-resolvers'
-import { isAuthenticated } from './authorization'
+import { isAuthenticated, isRecipeOwner } from './authorization'
 
 export default {
   Query: {
@@ -24,6 +24,15 @@ export default {
           ingredients,
           author: me._id,
         }).save()
+        return recipe
+      },
+    ),
+    deleteRecipe: combineResolvers(
+      isAuthenticated,
+      isRecipeOwner,
+      async (parent, { _id }, { Recipe }) => {
+        const recipe = await Recipe.findByIdAndRemove(_id)
+        console.log(recipe)
         return recipe
       },
     ),

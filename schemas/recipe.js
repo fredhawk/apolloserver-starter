@@ -42,5 +42,6 @@ export default gql`
 
   extend type Mutation {
     createRecipe(input: RecipeInput!): Recipe
+    deleteRecipe(_id: ID!): Boolean!
   }
 `
