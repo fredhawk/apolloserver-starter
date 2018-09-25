@@ -1,16 +1,21 @@
-import connection from '../database/database'
+// import connection from '../database/database'
+import mongoose from 'mongoose'
 import { Recipe } from '../model/model'
 
-import 'dotenv/config'
+// import 'dotenv/config'
 
 describe('Recipe', () => {
   let db
-  beforeAll(() => {
-    db = connection(process.env.TESTDB)
+  beforeAll(async () => {
+    await mongoose.connect(
+      global.__MONGO_URI__,
+      { useNewUrlParser: true },
+    )
+    db = await mongoose.connection
   })
 
-  beforeEach(async done => {
-    await db.collections.recipes.drop()
+  beforeEach(async () => {
+    await Recipe.deleteMany({})
     const recipe1 = await new Recipe({
       title: 'Meatballs with mash potatoes',
       description: 'Mouthful of joy',
@@ -86,12 +91,10 @@ describe('Recipe', () => {
     await recipe2.save()
     await recipe3.save()
     await recipe4.save()
-    done()
   })
 
-  afterAll(async done => {
+  afterAll(async () => {
     await db.close()
-    return done()
   })
 
   it('should be able to create a recipe', async () => {

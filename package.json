@@ -12,6 +12,7 @@
     "test:coverage": "jest --coverage"
   },
   "jest": {
+    "testEnvironment": "node",
     "modulePathIgnorePatterns": [
       "node_modules"
     ],
@@ -47,6 +48,8 @@
     "graphql": "^0.13.2",
     "graphql-resolvers": "^0.2.2",
     "jsonwebtoken": "^8.3.0",
+    "mongodb": "^3.1.6",
+    "mongodb-memory-server": "^2.2.0",
     "mongoose": "^5.2.2"
   }
 }

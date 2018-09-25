@@ -1,16 +1,18 @@
-import connection from '../database/database'
+import mongoose from 'mongoose'
 import { User } from '../model/model'
-
-import 'dotenv/config'
 
 describe('User', () => {
   let db
-  beforeAll(() => {
-    db = connection(process.env.TESTDB)
+  beforeAll(async () => {
+    await mongoose.connect(
+      global.__MONGO_URI__,
+      { useNewUrlParser: true },
+    )
+    db = await mongoose.connection
   })
 
-  beforeEach(async done => {
-    await db.collections.users.drop()
+  beforeEach(async () => {
+    await User.deleteMany({})
     const jane = await new User({
       name: 'Jane',
       email: 'jane@example.com',
@@ -24,15 +26,13 @@ describe('User', () => {
 
     await jane.save()
     await rick.save()
-    done()
   })
 
-  afterAll(async done => {
+  afterAll(async () => {
     await db.close()
-    return done()
   })
 
-  it('should create a user', async done => {
+  it('should create a user', async () => {
     const joe = await new User({
       name: 'Joe',
       email: 'joe@example.com',
@@ -45,7 +45,7 @@ describe('User', () => {
     await expect(joe).toHaveProperty('name')
     await expect(joe).toHaveProperty('email')
     await expect(joe).toHaveProperty('password')
-    done()
+    // done()
   })
 
   it('should return all users', async () => {
