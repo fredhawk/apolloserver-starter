@@ -31,13 +31,9 @@ export default gql`
 
   extend type Mutation {
     createUser(input: UserInput!): Token
-    updateUser(
-      _id: String!
-      name: String
-      email: String
-      password: String
-    ): User
-    deleteUser(_id: String!): User
+    updateUser(_id: ID!, name: String, email: String, password: String): User
+    deleteUser(_id: ID!): User
+    cleanDB: Boolean!
     signInUser(email: String!, password: String): Token
   }
 `

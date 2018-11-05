@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { UserInputError, AuthenticationError } from 'apollo-server'
+import { combineResolvers } from 'graphql-resolvers'
+import { isAuthenticated, isRecipeOwner } from './authorization'
 
 const createToken = (user, secret, expiresIn) => {
   const { _id, name, email } = user
@@ -29,13 +31,27 @@ export default {
       const newUser = await new User({ name, email, password }).save()
       return { token: createToken(newUser, secret, '1hr') }
     },
-    async updateUser(parent, args, { User }) {
-      const user = await User.findByIdAndUpdate(args._id, args, { new: true })
-      return user
-    },
-    async deleteUser(parent, { _id }, { User }) {
-      const user = await User.findByIdAndRemove(_id)
-      return user
+    updateUser: combineResolvers(
+      isAuthenticated,
+      async (parent, args, { User }) => {
+        const user = await User.findByIdAndUpdate(args._id, args, { new: true })
+        return user
+      },
+    ),
+    deleteUser: combineResolvers(
+      isAuthenticated,
+      async (parent, { _id }, { User }) => {
+        const user = await User.findByIdAndRemove(_id)
+        return user
+      },
+    ),
+    async cleanDB(parent, args, { User, Recipe }) {
+      const user = await User.deleteMany({})
+      const recipe = await Recipe.deleteMany({})
+      if (user.ok === 1 && recipe.ok === 1) {
+        return true
+      }
+      return false
     },
     async signInUser(parent, { email, password }, { User, secret }) {
       const user = await User.findOne({ email })
