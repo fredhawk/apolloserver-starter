@@ -1,4 +1,4 @@
-import { users } from '../data/data'
+const { users } = require('../data/data')
 
 describe('User', () => {
   it('should return 4 users', () => {

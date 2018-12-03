@@ -1,4 +1,4 @@
-import { recipes } from '../data/data'
+const { recipes } = require('../data/data')
 
 describe('Recipes', () => {
   it('should have 4 recipes', () => {
