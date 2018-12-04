@@ -4,7 +4,8 @@
   "description": "Boilerplate starter project for different backend setups.",
   "main": "index.js",
   "scripts": {
-    "start": "npx nodemon --exec babel-node index.js",
+    "dev": "nodemon --exec babel-node src/index.js",
+    "build": "babel src --out-dir dist",
     "lint-staged": "lint-staged",
     "format": "prettier --write \"**/*.+(js|md|ts|css|sass|less|graphql|yml|yaml|scss|json|vue)\"",
     "test": "jest",
@@ -14,9 +15,13 @@
   "jest": {
     "testEnvironment": "node",
     "modulePathIgnorePatterns": [
-      "node_modules"
+      "node_modules",
+      "dist"
     ],
-    "testURL": "http://localhost/"
+    "testURL": "http://localhost/",
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "husky": {
     "hooks": {
@@ -27,8 +32,11 @@
   "author": "Fred Hawk",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^2.10.0",

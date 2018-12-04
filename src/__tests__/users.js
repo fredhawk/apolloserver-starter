@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import { User } from '../model/model'
+const mongoose = require('mongoose')
+const { User } = require('../model/model')
 
 describe('User', () => {
   let db

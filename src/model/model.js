@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import bcrypt from 'bcrypt'
+const bcrypt = require('bcrypt')
+const mongoose = require('mongoose')
 
 const { Schema } = mongoose
 const skipInit = process.env.NODE_ENV === 'test'
@@ -85,11 +85,11 @@ const recipeSchema = new Schema(
   { timestamps: true },
 )
 
-export const User = mongoose.model(`User`, userSchema, 'users', skipInit)
+const User = mongoose.model(`User`, userSchema, 'users', skipInit)
 
-export const Recipe = mongoose.model(
-  `Recipe`,
-  recipeSchema,
-  'recipes',
-  skipInit,
-)
+const Recipe = mongoose.model(`Recipe`, recipeSchema, 'recipes', skipInit)
+
+module.exports = {
+  User,
+  Recipe,
+}

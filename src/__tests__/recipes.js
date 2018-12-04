@@ -1,8 +1,5 @@
-// import connection from '../database/database'
-import mongoose from 'mongoose'
-import { Recipe } from '../model/model'
-
-// import 'dotenv/config'
+const mongoose = require('mongoose')
+const { Recipe } = require('../model/model')
 
 describe('Recipe', () => {
   let db
