@@ -1,4 +1,4 @@
-export const users = [
+const users = [
   {
     id: 1231,
     name: 'Jon Snow',
@@ -19,7 +19,7 @@ export const users = [
   },
 ]
 
-export const recipes = [
+const recipes = [
   {
     id: 'sdhf123',
     title: 'Meatballs with mash potatoes',
@@ -96,3 +96,8 @@ export const recipes = [
     author: 1233,
   },
 ]
+
+module.exports = {
+  users,
+  recipes,
+}
